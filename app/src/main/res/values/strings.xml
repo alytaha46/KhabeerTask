@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">KhabeerTask</string>
+    <string name="app_name" translatable="false">KhabeerTask</string>
+    <string name="hello">Hello World!</string>
 </resources>
