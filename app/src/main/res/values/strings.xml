@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name" translatable="false">KhabeerTask</string>
+    <string name="app_name">KhabeerTask</string>
     <string name="hello">Hello World!</string>
+    <string name="login_fragment">Login</string>
+    <string name="payroll_fragment">Payroll</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="mobile_error">Mobile Number is not correct</string>
+    <string name="password_error">Password must be more than 5 characters</string>
 </resources>

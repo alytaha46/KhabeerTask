@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">اهلا وسهلااااا</string>
+    <string name="login_fragment">تسجيل الدخول</string>
+    <string name="payroll_fragment">راتب الموظف</string>
+    <string name="mobile_number">رقم الموبايل</string>
+    <string name="app_name">الخبير</string>
+    <string name="password">كلمة السر</string>
+    <string name="mobile_error">رقم الموبايل خطا</string>
+    <string name="password_error">"يجب ان تكون كلمة السر اكثر من 5 حروف "</string>
 </resources>

@@ -1,7 +1,8 @@
-package com.example.khabeertask
+package com.example.khabeertask.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.khabeertask.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
