@@ -7,13 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.khabeertask.network.DataTransfareObject.LoginBody
 import com.example.khabeertask.network.Network
+import com.example.khabeertask.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-enum class LoginLoadingStatus { LOADING, ERROR, DONE }
-enum class ErrorType { MOBILE, PASSWORD, API , NONE }
+enum class LoginLoadingStatus { LOADING, DONE }
+enum class ErrorType { MOBILE, PASSWORD, API, NONE }
 
 class LoginViewModel : ViewModel() {
     val mobileNumber = MutableLiveData<String>()
@@ -37,32 +38,16 @@ class LoginViewModel : ViewModel() {
         }
         _LoadingStatus.value = LoginLoadingStatus.LOADING
         _errorType.value = ErrorType.NONE
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
+                val repository = Repository()
                 val loginBody = LoginBody(mobileNumber,password.toInt())
-                val qwe = Network.networkCall.login(loginBody).await()
-
-                if (qwe.success == true)
-                {
-                    withContext(Dispatchers.Main){
-                        _LoadingStatus.value = LoginLoadingStatus.DONE
-                    }
-                    Timber.e(""+qwe.token)
-                    val res = Network.networkCall.getPayroll("Bearer "+qwe.token!!).await()
-                    Timber.e(""+res)
-
-                }
-                else
-                {
-                    withContext(Dispatchers.Main) {
-                        _LoadingStatus.value = LoginLoadingStatus.DONE
-                        _errorType.value = ErrorType.API
-                    }
-                }
-            }
-            catch (e: Exception)
-            {
-                Timber.e("e"+e.message)
+                repository.loginAndPayrollAndCache(loginBody)
+                _LoadingStatus.value = LoginLoadingStatus.DONE
+            } catch (e: Exception) {
+                Timber.e(""+e.message)
+                _LoadingStatus.value = LoginLoadingStatus.DONE
+                _errorType.value = ErrorType.API
             }
         }
 
