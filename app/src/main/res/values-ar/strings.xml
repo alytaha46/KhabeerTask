@@ -8,5 +8,5 @@
     <string name="password">كلمة السر</string>
     <string name="mobile_error">رقم الموبايل خطا</string>
     <string name="password_error">"يجب ان تكون كلمة السر اكثر من 5 حروف "</string>
-    <string name="api_error">خطا في رقم الموبايل او كلمة السر</string>
+    <string name="api_error">هذا المستخدم غير موجود حدث خطأ فى عملية التسجيل</string>
 </resources>

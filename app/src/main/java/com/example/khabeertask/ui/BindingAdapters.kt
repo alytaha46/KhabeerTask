@@ -8,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import com.example.khabeertask.R
 import com.example.khabeertask.viewmodels.ErrorType
 import com.example.khabeertask.viewmodels.LoginLoadingStatus
-import timber.log.Timber
 
 @BindingAdapter("setErrorText")
 fun setErrorText(textView: TextView, error: ErrorType) {
@@ -25,13 +24,11 @@ fun setErrorText(textView: TextView, error: ErrorType) {
 
 @BindingAdapter("loginLoading")
 fun loginLoading(progressBar: ProgressBar, loginLoadingStatus: LoginLoadingStatus) {
-    Timber.e("" + loginLoadingStatus)
     progressBar.visibility =
         if (loginLoadingStatus == LoginLoadingStatus.LOADING) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter("disable")
 fun disable(view: View, loginLoadingStatus: LoginLoadingStatus) {
-    Timber.e("" + loginLoadingStatus)
     view.isEnabled = loginLoadingStatus != LoginLoadingStatus.LOADING
 }
