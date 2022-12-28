@@ -3,6 +3,7 @@ package com.example.khabeertask.repository
 import com.example.khabeertask.network.DataTransfareObject.LoginBody
 import com.example.khabeertask.network.DataTransfareObject.LoginResponse
 import com.example.khabeertask.network.DataTransfareObject.PayrollResponse
+import com.example.khabeertask.network.DataTransfareObject.asDatabaseModel
 import com.example.khabeertask.network.Network
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,15 +31,7 @@ class Repository {
             throw Exception("Login Failed")
         } else {
             val payrollResponse = getPayroll(loginResponse.token ?: "")
-            Timber.e("" + (payrollResponse.payroll?.employee?.get(0)?.eMPDATAAR))
-            Timber.e("" + (payrollResponse.payroll?.employee?.get(0)?.jOBNAMEAR))
-            Timber.e("" + (payrollResponse.payroll?.date))
-            Timber.e("" + (payrollResponse.payroll?.allowences?.get(0))?.cOMPDESCAR)
-            Timber.e("" + (payrollResponse.payroll?.allowences?.get(0))?.sALVALUE)
-            Timber.e("" + (payrollResponse.payroll?.allowences?.get(1))?.cOMPDESCAR)
-            Timber.e("" + (payrollResponse.payroll?.allowences?.get(1))?.sALVALUE)
-            Timber.e("" + (payrollResponse.payroll?.deduction?.get(0))?.cOMPDESCAR)
-            Timber.e("" + (payrollResponse.payroll?.deduction?.get(0))?.sALVALUE)
+            Timber.e("" + payrollResponse.asDatabaseModel(loginResponse.token ?: ""))
             //caching
         }
     }
