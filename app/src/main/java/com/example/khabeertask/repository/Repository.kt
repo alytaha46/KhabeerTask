@@ -20,6 +20,7 @@ class Repository(private val database: AppDatabase) {
     {
         it.asDomainModel()
     }
+    val isDatabaseEmpty: LiveData<Boolean> = database.payrollDao.isEmpty()
 
     suspend fun login(loginBody: LoginBody): LoginResponse {
         val loginResponse = withContext(Dispatchers.IO) {

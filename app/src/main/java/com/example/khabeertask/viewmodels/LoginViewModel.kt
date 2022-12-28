@@ -16,18 +16,22 @@ enum class LoginLoadingStatus { LOADING, DONE }
 enum class ErrorType { MOBILE, PASSWORD, API, NONE }
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private val database = getDatabase(application)
+    val database = getDatabase(application)
     val repository = Repository(database)
+    val isDatabaseEmpty = repository.isDatabaseEmpty
     val mobileNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
     private val _errorType = MutableLiveData<ErrorType>(ErrorType.NONE)
-    val errorType get() = _errorType
+    val errorType:LiveData<ErrorType> get() = _errorType
 
-    private val _LoadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.DONE)
-    val LoadingStatus get() = _LoadingStatus
+    private val _moveToPayrollFragment = MutableLiveData<Boolean>(false)
+    val moveToPayrollFragment:LiveData<Boolean> get() = _moveToPayrollFragment
 
-    fun login() {
+    private val _LoadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.LOADING)
+    val LoadingStatus:LiveData<LoginLoadingStatus> get() = _LoadingStatus
+
+    fun loginButton() {
         val mobileNumber: String = mobileNumber.value.toString()
         val password: String = password.value.toString()
         if (mobileNumber.length < 10) {
@@ -44,12 +48,24 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 val loginBody = LoginBody(mobileNumber, password.toInt())
                 repository.loginAndPayrollAndCache(loginBody)
                 _LoadingStatus.value = LoginLoadingStatus.DONE
-                //move to second fragment
+                moveToPayrollFragment()
             } catch (e: Exception) {
                 Timber.e("" + e.message)
                 _LoadingStatus.value = LoginLoadingStatus.DONE
                 _errorType.value = ErrorType.API
             }
         }
+    }
+
+    fun moveToPayrollFragment() {
+        _moveToPayrollFragment.value = true
+    }
+
+    fun onNavigateDone() {
+        _moveToPayrollFragment.value = false
+    }
+
+    fun setStatusToDone(){
+        _LoadingStatus.value = LoginLoadingStatus.DONE
     }
 }
