@@ -1,5 +1,11 @@
 package com.example.khabeertask.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.khabeertask.database.AppDatabase
+import com.example.khabeertask.database.model.PayrollRoom
+import com.example.khabeertask.database.model.asDomainModel
+import com.example.khabeertask.model.Payroll
 import com.example.khabeertask.network.DataTransfareObject.LoginBody
 import com.example.khabeertask.network.DataTransfareObject.LoginResponse
 import com.example.khabeertask.network.DataTransfareObject.PayrollResponse
@@ -9,7 +15,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class Repository {
+class Repository(private val database: AppDatabase) {
+    val payroll: LiveData<Payroll> = Transformations.map(database.payrollDao.getPayroll())
+    {
+        it.asDomainModel()
+    }
+
     suspend fun login(loginBody: LoginBody): LoginResponse {
         val loginResponse = withContext(Dispatchers.IO) {
             return@withContext Network.networkCall.login(loginBody).await()
@@ -31,8 +42,12 @@ class Repository {
             throw Exception("Login Failed")
         } else {
             val payrollResponse = getPayroll(loginResponse.token ?: "")
-            Timber.e("" + payrollResponse.asDatabaseModel(loginResponse.token ?: ""))
-            //caching
+            val payrollRoom = payrollResponse.asDatabaseModel(loginResponse.token ?: "")
+            insertPayrollIntoDatabase(payrollRoom)
         }
+    }
+
+    suspend fun insertPayrollIntoDatabase(payrollRoom: PayrollRoom) {
+        database.payrollDao.insertPayroll(payrollRoom)
     }
 }

@@ -1,10 +1,9 @@
 package com.example.khabeertask.viewmodels
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.khabeertask.database.getDatabase
 import com.example.khabeertask.network.DataTransfareObject.LoginBody
 import com.example.khabeertask.network.Network
 import com.example.khabeertask.repository.Repository
@@ -16,7 +15,9 @@ import timber.log.Timber
 enum class LoginLoadingStatus { LOADING, DONE }
 enum class ErrorType { MOBILE, PASSWORD, API, NONE }
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
+    private val database = getDatabase(application)
+    val repository = Repository(database)
     val mobileNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 
@@ -40,16 +41,15 @@ class LoginViewModel : ViewModel() {
         _errorType.value = ErrorType.NONE
         viewModelScope.launch {
             try {
-                val repository = Repository()
-                val loginBody = LoginBody(mobileNumber,password.toInt())
+                val loginBody = LoginBody(mobileNumber, password.toInt())
                 repository.loginAndPayrollAndCache(loginBody)
                 _LoadingStatus.value = LoginLoadingStatus.DONE
+                //move to second fragment
             } catch (e: Exception) {
-                Timber.e(""+e.message)
+                Timber.e("" + e.message)
                 _LoadingStatus.value = LoginLoadingStatus.DONE
                 _errorType.value = ErrorType.API
             }
         }
-
     }
 }
