@@ -20,17 +20,18 @@
             android:id="@+id/mobile_number_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:hint="@string/mobile_number"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="5dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mobile_number"
+                disable="@{vm.loadingStatus}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="@={vm.mobileNumber}"/>
+                android:text="@={vm.mobileNumber}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,40 +39,54 @@
             android:id="@+id/password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:hint="@string/password"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mobile_number_layout"
-            android:layout_margin="5dp">
+            app:layout_constraintTop_toBottomOf="@id/mobile_number_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
+                disable="@{vm.loadingStatus}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="@={vm.password}"/>
+                android:text="@={vm.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/error"
-            android:layout_margin="10dp"
+            setErrorText="@{vm.errorType}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/password_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
             android:textColor="@color/red"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
         <Button
+            disable="@{vm.loadingStatus}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/login_fragment"
             android:onClick="@{()->vm.login()}"
-            />
+            android:text="@string/login_fragment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/status_loading_wheel"
+            loginLoading="@{vm.loadingStatus}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

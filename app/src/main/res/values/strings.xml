@@ -7,4 +7,5 @@
     <string name="password">Password</string>
     <string name="mobile_error">Mobile Number is not correct</string>
     <string name="password_error">Password must be more than 5 characters</string>
+    <string name="api_error">The Phone Number or Password you entered is incorrect</string>
 </resources>

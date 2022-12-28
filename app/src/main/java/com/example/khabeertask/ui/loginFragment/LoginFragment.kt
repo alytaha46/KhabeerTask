@@ -27,16 +27,6 @@ class LoginFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.errorType.observe(viewLifecycleOwner, Observer {
-            if (it == "Mobile") {
-                binding.error.setText(R.string.mobile_error)
-            } else if (it == "Password") {
-                binding.error.setText(R.string.password_error)
-            }else
-            {
-                binding.error.text = ""
-            }
-        })
         return binding.root
     }
 }
