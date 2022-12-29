@@ -1,9 +1,7 @@
-package com.example.khabeertask.network.DataTransfareObject
+package com.example.khabeertask.network.dataTransfareObject
 
-import androidx.compose.ui.unit.Dp
 import com.example.khabeertask.database.model.PayrollRoom
 import com.squareup.moshi.Json
-import timber.log.Timber
 
 data class PayrollResponse(
 

@@ -1,4 +1,4 @@
-package com.example.khabeertask.network.DataTransfareObject
+package com.example.khabeertask.network.dataTransfareObject
 
 import com.squareup.moshi.Json
 

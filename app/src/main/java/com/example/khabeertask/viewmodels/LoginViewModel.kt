@@ -1,23 +1,19 @@
 package com.example.khabeertask.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.khabeertask.database.getDatabase
-import com.example.khabeertask.network.DataTransfareObject.LoginBody
-import com.example.khabeertask.network.Network
+import com.example.khabeertask.network.dataTransfareObject.LoginBody
 import com.example.khabeertask.repository.Repository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 enum class LoginLoadingStatus { LOADING, DONE }
 enum class ErrorType { MOBILE, PASSWORD, API, NONE }
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    val database = getDatabase(application)
-    val repository = Repository(database)
+    private val database = getDatabase(application)
+    private val repository = Repository(database)
     val isDatabaseEmpty = repository.isDatabaseEmpty
     val mobileNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -28,8 +24,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val _moveToPayrollFragment = MutableLiveData<Boolean>(false)
     val moveToPayrollFragment:LiveData<Boolean> get() = _moveToPayrollFragment
 
-    private val _LoadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.LOADING)
-    val LoadingStatus:LiveData<LoginLoadingStatus> get() = _LoadingStatus
+    private val _loadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.LOADING)
+    val loadingStatus:LiveData<LoginLoadingStatus> get() = _loadingStatus
 
     fun loginButton() {
         val mobileNumber: String = mobileNumber.value.toString()
@@ -41,17 +37,17 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             _errorType.value = ErrorType.PASSWORD
             return
         }
-        _LoadingStatus.value = LoginLoadingStatus.LOADING
+        _loadingStatus.value = LoginLoadingStatus.LOADING
         _errorType.value = ErrorType.NONE
         viewModelScope.launch {
             try {
                 val loginBody = LoginBody(mobileNumber, password.toInt())
                 repository.loginAndPayrollAndCache(loginBody)
-                _LoadingStatus.value = LoginLoadingStatus.DONE
+                _loadingStatus.value = LoginLoadingStatus.DONE
                 moveToPayrollFragment()
             } catch (e: Exception) {
                 Timber.e("" + e.message)
-                _LoadingStatus.value = LoginLoadingStatus.DONE
+                _loadingStatus.value = LoginLoadingStatus.DONE
                 _errorType.value = ErrorType.API
             }
         }
@@ -66,6 +62,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setStatusToDone(){
-        _LoadingStatus.value = LoginLoadingStatus.DONE
+        _loadingStatus.value = LoginLoadingStatus.DONE
     }
 }

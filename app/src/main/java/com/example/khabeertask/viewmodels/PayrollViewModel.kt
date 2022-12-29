@@ -13,17 +13,17 @@ import kotlinx.coroutines.withContext
 
 class PayrollViewModel(application: Application) : AndroidViewModel(application) {
     private val database = getDatabase(application)
-    val repository = Repository(database)
+    private val repository = Repository(database)
     val payroll = repository.payroll
 
-    private val _LoadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.LOADING)
-    val LoadingStatus: LiveData<LoginLoadingStatus> get() = _LoadingStatus
+    private val _loadingStatus = MutableLiveData<LoginLoadingStatus>(LoginLoadingStatus.LOADING)
+    val loadingStatus: LiveData<LoginLoadingStatus> get() = _loadingStatus
 
     private val _moveToLoginFragment = MutableLiveData<Boolean>(false)
     val moveToLoginFragment: LiveData<Boolean> get() = _moveToLoginFragment
     fun logout() {
         viewModelScope.launch(Dispatchers.Main) {
-            _LoadingStatus.value = LoginLoadingStatus.LOADING
+            _loadingStatus.value = LoginLoadingStatus.LOADING
             withContext(Dispatchers.IO)
             {
                 database.payrollDao.clearPayroll()
@@ -32,7 +32,7 @@ class PayrollViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun moveToLoginFragment() {
+    private fun moveToLoginFragment() {
         _moveToLoginFragment.value = true
     }
 
@@ -41,6 +41,6 @@ class PayrollViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun doneLoading() {
-        _LoadingStatus.value = LoginLoadingStatus.DONE
+        _loadingStatus.value = LoginLoadingStatus.DONE
     }
 }

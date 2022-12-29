@@ -8,7 +8,7 @@ import com.example.khabeertask.database.dao.PayrollDao
 import com.example.khabeertask.database.model.PayrollRoom
 
 @Database(entities = [PayrollRoom::class], version = 1, exportSchema = false)
-abstract class AppDatabase() : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract val payrollDao: PayrollDao
 }
 

@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.khabeertask.R
 import com.example.khabeertask.databinding.FragmentPayrollBinding
 import com.example.khabeertask.viewmodels.PayrollViewModel
-import timber.log.Timber
+
 
 
 class PayrollFragment : Fragment() {
@@ -22,22 +21,22 @@ class PayrollFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(this)[PayrollViewModel::class.java]
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_payroll, container, false)
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.payroll.observe(viewLifecycleOwner, Observer {
+        viewModel.payroll.observe(viewLifecycleOwner) {
             if (it != null) {
                 viewModel.doneLoading()
             }
-        })
-        viewModel.moveToLoginFragment.observe(viewLifecycleOwner, Observer {
+        }
+        viewModel.moveToLoginFragment.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().navigate(PayrollFragmentDirections.actionPayrollFragmentToLoginFragment())
                 viewModel.onNavigateDone()
             }
-        })
+        }
         return binding.root
     }
 

@@ -9,18 +9,22 @@ import com.example.khabeertask.R
 import com.example.khabeertask.ui.payrollFragment.CustomView
 import com.example.khabeertask.viewmodels.ErrorType
 import com.example.khabeertask.viewmodels.LoginLoadingStatus
-import timber.log.Timber
 
 @BindingAdapter("setErrorText")
 fun setErrorText(textView: TextView, error: ErrorType) {
-    if (error == ErrorType.MOBILE) {
-        textView.setText(R.string.mobile_error)
-    } else if (error == ErrorType.PASSWORD) {
-        textView.setText(R.string.password_error)
-    } else if (error == ErrorType.API) {
-        textView.setText(R.string.api_error)
-    } else {
-        textView.text = ""
+    when (error) {
+        ErrorType.MOBILE -> {
+            textView.setText(R.string.mobile_error)
+        }
+        ErrorType.PASSWORD -> {
+            textView.setText(R.string.password_error)
+        }
+        ErrorType.API -> {
+            textView.setText(R.string.api_error)
+        }
+        else -> {
+            textView.text = ""
+        }
     }
 }
 

@@ -3,25 +3,24 @@ package com.example.khabeertask.ui.payrollFragment
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Path
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.withStyledAttributes
 import com.example.khabeertask.R
-import timber.log.Timber
+
 
 class CustomView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-    var claimingSalary: Double = 0.0;
-    var claimingSalaryPercent: Double = 0.0;
+    var claimingSalary: Double = 0.0
+    var claimingSalaryPercent: Double = 0.0
     var claimingSalaryEndAngle: Double = 0.0
-    var deduction: Double = 0.0;
-    var deductionEndAngle: Double = 0.0;
-    var deductionPercent: Double = 0.0;
-    var total: Double = 1.0;
+    var deduction: Double = 0.0
+    var deductionEndAngle: Double = 0.0
+    var deductionPercent: Double = 0.0
+    var total: Double = 1.0
     private var color1 = 0
     private var color2 = 0
     private var widthSize = 0

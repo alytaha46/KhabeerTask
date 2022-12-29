@@ -1,13 +1,12 @@
 package com.example.khabeertask.network
 
-import com.example.khabeertask.network.DataTransfareObject.LoginBody
-import com.example.khabeertask.network.DataTransfareObject.LoginResponse
-import com.example.khabeertask.network.DataTransfareObject.PayrollResponse
+import com.example.khabeertask.network.dataTransfareObject.LoginBody
+import com.example.khabeertask.network.dataTransfareObject.LoginResponse
+import com.example.khabeertask.network.dataTransfareObject.PayrollResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
