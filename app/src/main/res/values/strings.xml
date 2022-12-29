@@ -12,4 +12,7 @@
     <string name="claiming">Claiming</string>
     <string name="deduction">Deduction</string>
     <string name="net_salary">Total</string>
+    <string name="index">index</string>
+    <string name="term">Term</string>
+    <string name="value">Value</string>
 </resources>

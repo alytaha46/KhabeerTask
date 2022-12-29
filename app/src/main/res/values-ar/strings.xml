@@ -13,4 +13,7 @@
     <string name="claiming">الاستحقاقات</string>
     <string name="deduction">الاستقطاعات</string>
     <string name="net_salary">الاجمالي</string>
+    <string name="index">م</string>
+    <string name="term">البند</string>
+    <string name="value">القيمة</string>
 </resources>

@@ -137,6 +137,7 @@
                     card_view:layout_constraintStart_toEndOf="@id/color1"
                     card_view:layout_constraintTop_toTopOf="parent"
                     tools:text="qweqwe" />
+
                 <TextView
                     android:id="@+id/claiming_salary_label"
                     android:layout_width="wrap_content"
@@ -168,6 +169,7 @@
                     card_view:layout_constraintStart_toEndOf="@id/color2"
                     card_view:layout_constraintTop_toBottomOf="@id/claiming_salary"
                     tools:text="qweqwe" />
+
                 <TextView
                     android:id="@+id/deduction_label"
                     android:layout_width="wrap_content"
@@ -187,15 +189,16 @@
                     card_view:layout_constraintBottom_toBottomOf="@id/deduction"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="@id/deduction" />
+
                 <ImageView
                     android:id="@+id/color3"
                     android:layout_width="0dp"
                     android:layout_height="5dp"
                     android:layout_marginVertical="10dp"
                     android:background="#000000"
+                    card_view:layout_constraintEnd_toEndOf="@id/deduction_label"
                     card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toBottomOf="@id/deduction"
-                    card_view:layout_constraintEnd_toEndOf="@id/deduction_label"/>
+                    card_view:layout_constraintTop_toBottomOf="@id/deduction" />
 
                 <TextView
                     android:id="@+id/net_salary"
@@ -209,6 +212,7 @@
                     card_view:layout_constraintStart_toEndOf="@id/color4"
                     card_view:layout_constraintTop_toBottomOf="@id/color3"
                     tools:text="qweqwe" />
+
                 <TextView
                     android:id="@+id/net_salary_label"
                     android:layout_width="wrap_content"
@@ -230,19 +234,175 @@
                     card_view:layout_constraintTop_toTopOf="@id/net_salary" />
 
                 <com.example.khabeertask.ui.payrollFragment.CustomView
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
                     addClaiming="@{vm.payroll.claimingSalary}"
                     addDeduction="@{vm.payroll.deduction}"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     card_view:firstColor="@color/color1"
-                    card_view:secondColor="@color/color2"
-                    card_view:layout_constraintTop_toTopOf="@id/claiming_salary"
                     card_view:layout_constraintBottom_toBottomOf="@id/net_salary"
-                    card_view:layout_constraintStart_toEndOf="@id/color3"
                     card_view:layout_constraintEnd_toEndOf="parent"
-                    />
+                    card_view:layout_constraintStart_toEndOf="@id/color3"
+                    card_view:layout_constraintTop_toTopOf="@id/claiming_salary"
+                    card_view:secondColor="@color/color2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/table_info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/details_info_card">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow
+                        android:background="@color/colorSecondaryVariant"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/index"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/term"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/value"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:background="@color/white"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{vm.payroll.basicSalaryString}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{Double.toString(vm.payroll.basicSalary)}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:background="#d7f3f6"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{vm.payroll.bonusSalaryString}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{Double.toString(vm.payroll.bonusSalary)}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:background="#fadbd8"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{vm.payroll.deductionString}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{Double.toString(vm.payroll.deduction)}"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+                    </TableRow>
+
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
