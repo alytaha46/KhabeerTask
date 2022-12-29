@@ -1,7 +1,7 @@
 package com.example.khabeertask.ui
 
+import android.graphics.Paint
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -44,4 +44,10 @@ fun addData(view: CustomView, claimingSalary: Double, deduction: Double) {
     view.deductionPercent = deduction/view.total
     view.claimingSalaryEndAngle = view.claimingSalaryPercent*360
     view.deductionEndAngle = view.deductionPercent*360
+}
+
+@BindingAdapter("setStrokeText")
+fun setStrokeText(textView: TextView, string: String) {
+    textView.text = string
+    textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 }

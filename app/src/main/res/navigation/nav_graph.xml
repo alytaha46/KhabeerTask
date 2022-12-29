@@ -20,5 +20,11 @@
         android:id="@+id/payrollFragment"
         android:name="com.example.khabeertask.ui.payrollFragment.PayrollFragment"
         android:label="fragment_payroll"
-        tools:layout="@layout/fragment_payroll" />
+        tools:layout="@layout/fragment_payroll" >
+        <action
+            android:id="@+id/action_payrollFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/payrollFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

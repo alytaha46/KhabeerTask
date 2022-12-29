@@ -16,9 +16,9 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class Repository(private val database: AppDatabase) {
-    val payroll: LiveData<Payroll> = Transformations.map(database.payrollDao.getPayroll())
+    val payroll: LiveData<Payroll?> = Transformations.map(database.payrollDao.getPayroll())
     {
-        it.asDomainModel()
+        it?.asDomainModel()
     }
     val isDatabaseEmpty: LiveData<Boolean> = database.payrollDao.isEmpty()
 

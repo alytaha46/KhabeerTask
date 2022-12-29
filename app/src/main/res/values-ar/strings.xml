@@ -16,4 +16,5 @@
     <string name="index">م</string>
     <string name="term">البند</string>
     <string name="value">القيمة</string>
+    <string name="logout">تسجيل خروج</string>
 </resources>
