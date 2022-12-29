@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,16 +10,240 @@
             type="com.example.khabeertask.viewmodels.PayrollViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.payrollFragment.PayrollFragment">
+        android:layout_margin="8dp"
+        android:background="@color/background">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_info_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/payroll_fragment" />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/person_image"
+                    android:layout_width="100dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="personImage"
+                    android:src="@drawable/person"
+                    card_view:layout_constraintBottom_toTopOf="@id/date_label"
+                    card_view:layout_constraintDimensionRatio="1:1"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/date_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{vm.payroll.date}"
+                    android:textSize="18sp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="@id/person_image"
+                    card_view:layout_constraintHorizontal_bias="0.0"
+                    card_view:layout_constraintStart_toStartOf="@id/person_image"
+                    card_view:layout_constraintTop_toBottomOf="@id/person_image"
+                    card_view:layout_constraintVertical_bias="1.0"
+                    tools:text="q" />
+
+                <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.payroll.name}"
+                    android:textSize="25sp"
+                    card_view:layout_constraintBottom_toTopOf="@id/job_name_label"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@id/person_image"
+                    card_view:layout_constraintTop_toTopOf="@id/person_image"
+                    tools:text="asdasdasd" />
+
+                <TextView
+                    android:id="@+id/job_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.payroll.jobName}"
+                    android:textSize="18sp"
+                    card_view:layout_constraintBottom_toTopOf="@id/total_salary"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@id/person_image"
+                    card_view:layout_constraintTop_toBottomOf="@id/name_label"
+                    tools:text="asdasdasd" />
+
+                <TextView
+                    android:id="@+id/total_salary_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_salary"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="@id/date_label"
+                    card_view:layout_constraintEnd_toStartOf="@id/total_salary"
+                    card_view:layout_constraintHorizontal_chainStyle="packed"
+                    card_view:layout_constraintStart_toEndOf="@id/person_image"
+                    card_view:layout_constraintTop_toBottomOf="@id/job_name_label" />
+
+                <TextView
+                    android:id="@+id/total_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{Double.toString(vm.payroll.netSalary)}"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="@id/total_salary_label"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@id/total_salary_label"
+                    card_view:layout_constraintTop_toTopOf="@id/total_salary_label"
+                    tools:text="325.25" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/details_info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="15dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/main_info_card">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <TextView
+                    android:id="@+id/claiming_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@{Double.toString(vm.payroll.claimingSalary)}"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toTopOf="@id/deduction"
+                    card_view:layout_constraintStart_toEndOf="@id/color1"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:text="qweqwe" />
+                <TextView
+                    android:id="@+id/claiming_salary_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/claiming"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="@id/claiming_salary"
+                    card_view:layout_constraintStart_toEndOf="@id/claiming_salary"
+                    card_view:layout_constraintTop_toTopOf="@id/claiming_salary" />
+
+                <ImageView
+                    android:id="@+id/color1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@color/color1"
+                    card_view:layout_constraintBottom_toBottomOf="@id/claiming_salary"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="@id/claiming_salary" />
+
+                <TextView
+                    android:id="@+id/deduction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@{Double.toString(vm.payroll.deduction)}"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    card_view:layout_constraintStart_toEndOf="@id/color2"
+                    card_view:layout_constraintTop_toBottomOf="@id/claiming_salary"
+                    tools:text="qweqwe" />
+                <TextView
+                    android:id="@+id/deduction_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/deduction"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="@id/deduction"
+                    card_view:layout_constraintStart_toEndOf="@id/deduction"
+                    card_view:layout_constraintTop_toTopOf="@id/deduction" />
+
+                <ImageView
+                    android:id="@+id/color2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@color/color2"
+                    card_view:layout_constraintBottom_toBottomOf="@id/deduction"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="@id/deduction" />
+                <ImageView
+                    android:id="@+id/color3"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="#000000"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toBottomOf="@id/deduction"
+                    card_view:layout_constraintEnd_toEndOf="@id/deduction_label"/>
+
+                <TextView
+                    android:id="@+id/net_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@{Double.toString(vm.payroll.netSalary)}"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@id/color4"
+                    card_view:layout_constraintTop_toBottomOf="@id/color3"
+                    tools:text="qweqwe" />
+                <TextView
+                    android:id="@+id/net_salary_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/net_salary"
+                    android:textSize="20sp"
+                    card_view:layout_constraintBottom_toBottomOf="@id/net_salary"
+                    card_view:layout_constraintStart_toEndOf="@id/net_salary"
+                    card_view:layout_constraintTop_toTopOf="@id/net_salary" />
+
+                <ImageView
+                    android:id="@+id/color4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="#00ff00"
+                    card_view:layout_constraintBottom_toBottomOf="@id/net_salary"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="@id/net_salary" />
+
+                <com.example.khabeertask.ui.payrollFragment.CustomView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    addClaiming="@{vm.payroll.claimingSalary}"
+                    addDeduction="@{vm.payroll.deduction}"
+                    card_view:firstColor="@color/color1"
+                    card_view:secondColor="@color/color2"
+                    card_view:layout_constraintTop_toTopOf="@id/claiming_salary"
+                    card_view:layout_constraintBottom_toBottomOf="@id/net_salary"
+                    card_view:layout_constraintStart_toEndOf="@id/color3"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -10,15 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.khabeertask.R
-import com.example.khabeertask.database.getDatabase
 import com.example.khabeertask.databinding.FragmentLoginBinding
-import com.example.khabeertask.viewmodels.LoginLoadingStatus
 import com.example.khabeertask.viewmodels.LoginViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import timber.log.Timber
 
 class LoginFragment : Fragment() {
 

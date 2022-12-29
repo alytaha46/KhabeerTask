@@ -8,4 +8,8 @@
     <string name="mobile_error">Mobile Number is not correct</string>
     <string name="password_error">Password must be more than 5 characters</string>
     <string name="api_error">Error in login, This User Not Exist</string>
+    <string name="total_salary">"Total Salary : "</string>
+    <string name="claiming">Claiming</string>
+    <string name="deduction">Deduction</string>
+    <string name="net_salary">Total</string>
 </resources>
