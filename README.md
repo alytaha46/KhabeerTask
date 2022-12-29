@@ -1,6 +1,6 @@
 # Khabeer Task
 
-Khabeer is an app to view the Payroll of the employers.
+Khabeer is an app to view the Payroll of the employees.
 
 You can view all the Salary Details by login to the server
 
